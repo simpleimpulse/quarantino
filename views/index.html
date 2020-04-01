@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    <h1>{{ title }}</h1>
+    <div id="panel">
+        <div id="stats">
+            
+            <div><span id="points">0</span></div>
+            <div id="lvl">lvl <span id="level">0</span></div>
+        </div>
+        <div id="gameover" class="hide">
+            <div id="restart">&#x21bb;</div>
+        </div>
+        <div id="handwash">
+            &#x1F9FC;
+        </div>
+    </div>
+
+    <div id="grid">
+    </div>
+
+    <div id="rules">
+        <h2>How To Play</h2>
+        <ul>
+            <li><div class='square active'><span class='emoji'>&#x1F600;</span></div>  Tap the emoji as fast as you can. </li>
+            <li><div class='square'><span class='emoji'>&#x26D4;</span></div>  Do not tap empty squares.</li>
+            <li><span><div class='square'><span class='emoji'>&#x1F927;&#x1F912;&#x1F637;</span></div> </span>  <p>If you tap an infected emoji, you must wash your hands (&#x1F9FC;) before touching others.</p></li>
+        </ul>
+    </div>
+  </div>
+
+{% endblock %}
