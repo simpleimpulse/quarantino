@@ -114,4 +114,10 @@ const q = {
 }
 
 window.addEventListener('DOMContentLoaded', q.init);
-window.addEventListener('resize', q.init);
+let windowWidth = window.outerWidth;
+window.addEventListener('resize', function() {
+    if (window.outerWidth != windowWidth) {
+      windowWidth = window.outerWidth;
+      q.init();
+    }
+  });
