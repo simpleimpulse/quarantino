@@ -2,6 +2,7 @@
 ## [IdleSite.com/quarantino](https://www.idlesite.com/quarantino)
 
 A tiny Javascript game to keep busy during the 2020 quarantine.
+
 ## How to run:
 - Clone the project.
 - `npm install`
