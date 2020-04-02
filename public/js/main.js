@@ -36,6 +36,7 @@ const q = {
         document.querySelector("#grid").className = ''
         document.querySelector("#gameover").className = 'hide'
         document.querySelector('#handwash').className = '';
+        document.querySelector('#restart').className = 'hide';
     },
     regenerate: function(){
         q.generateGrid();
@@ -77,6 +78,7 @@ const q = {
     gameOver: function(){
         document.querySelector("#grid").className = 'hide';
         document.querySelector("#gameover").className = '';
+        document.querySelector("#restart").className = '';
         q.handWash();
     },
     handleClick: function(e){
@@ -141,4 +143,3 @@ window.addEventListener('resize', function() {
       q.init();
     }
   });
-window.dispatchEvent(new Event('resize'));
