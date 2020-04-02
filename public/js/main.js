@@ -2,13 +2,14 @@ const q = {
     init: function(){
         document.querySelector('#restart').addEventListener('click', q.reset);
         document.querySelector('#handwash').addEventListener('click', q.handWash);
-        q.gridWidth = document.querySelector("#grid").offsetWidth;
+        q.gridWidth = document.body.offsetWidth - 20;
         q.reset();
     },
     level: 0,
     points: 0,
     infected: false,
     infectedEmoji: false,
+    isGameOver: false,
     gridWidth: 0,
     pick: function(){
         let grid = Math.min(q.level + 3, 20);
@@ -79,7 +80,8 @@ const q = {
         q.handWash();
     },
     handleClick: function(e){
-        if (e.target.className.indexOf('active')>-1){
+        if (!q.isGameOver){
+            if (e.target.className.indexOf('active')>-1){
                 if (q.infected){
                     return q.gameOver();
                 }
@@ -89,35 +91,54 @@ const q = {
                     q.infected = true;
                     document.querySelector('#handwash').className = 'active';
                 }
-                q.points += 1;
-        }
-        else {
-            return q.gameOver();
-        }
-        
-        this.updateStats();
+                q.points += q.speedPoints;
+                let pointsAdded = document.querySelector('#points-added')
+                pointsAdded.className = ''
+                pointsAdded.innerText = q.speedPoints;
+                setTimeout(function(){pointsAdded.className = 'fade';}, 500);
+            }
+            else {
+                return q.gameOver();
+            }
+            
+            this.updateStats();
 
-        var currentLevel = Math.floor(q.points/10)
-        if (q.level != currentLevel){
-            q.level = currentLevel;
-            return q.regenerate();
+            var currentLevel = Math.floor(q.points/10)
+
+            if (q.level != currentLevel){
+
+                q.level = currentLevel;
+                return q.regenerate();
+            }
+            this.resetSquares();
+            this.showSquare();
         }
-        this.resetSquares();
-        this.showSquare();
-        console.log(q.points,"pts ","lvl:",q.level)
+
     },
     showSquare: function(){
         let sq = document.querySelector('#grid').children[this.pick()];
         sq.querySelector('.emoji').innerHTML = this.pickEmoji();
         sq.className += " active"
+        q.startTimer();
+    },
+    speedPoints: 0,
+    timer1: null,
+    timer2: null,
+    startTimer: function(){
+        q.speedPoints = 2
+        window.clearTimeout(q.timer1)
+        window.clearTimeout(q.timer2)
+        q.timer1 = setTimeout(function(){q.speedPoints = 1; }, 500);
+        q.timer2 = setTimeout(function(){q.speedPoints = 0; }, 1500);
     }
 }
 
-window.addEventListener('DOMContentLoaded', q.init);
-let windowWidth = window.outerWidth;
+window.onload = q.init;
+var windowWidth = window.innerWidth;
 window.addEventListener('resize', function() {
-    if (window.outerWidth != windowWidth) {
-      windowWidth = window.outerWidth;
+    if (window.innerWidth != windowWidth) {
+      windowWidth = window.innerWidth;
       q.init();
     }
   });
+window.dispatchEvent(new Event('resize'));

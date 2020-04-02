@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+html {
+  overflow-y: scroll;
+}
 body {
   max-width: 400px;
+  min-width: 320px;
   margin: auto;
   padding: 10px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Abel", Helvetica, Arial, sans-serif;
   background: rgba(60,0,0,0.2);
 }
 h1{
@@ -10,6 +15,7 @@ h1{
 }
 #grid {
   max-width: 400px;
+  min-width: 320px;
   min-height: 1px;
   display: flex;
   flex-wrap: wrap;
@@ -25,10 +31,11 @@ h1{
   text-align: center;
   line-height: 100%;
   position: relative;
+  overflow: hidden;
   background: rgba(200,0,0,0.025);
   box-shadow: inset 1px 1px 5px 0 rgba(255,255,255,0.5), inset -1px -1px 5px 0 rgba(60,0,0,0.5);
   font-size: 20px;
-  transition: all 200ms linear;
+  transition: all 500ms linear;
 }
 .square:active{
   background: rgba(0,200,0,0.2);
@@ -78,16 +85,42 @@ h1{
   letter-spacing: -4px;
   font-family: MONOSPACE;
   text-shadow: 1px 1px 2px;
+  display: inline-block;
+  min-width: 40px;
+}
+#points-added{
+  position: absolute;
+  font-size: 30px;
+  color: rgba(0,60,0,1);
+  border-radius: 0 5px 5px 0;
+  padding: 15px 5px 15px;
+  letter-spacing: -4px;
+  font-family: MONOSPACE;
+  display: inline-block;
+  opacity: 0.5;
+}
+#points-added:before {
+  content: '+';
+  vertical-align: top;
+  margin-right: 5px;
+  font-size: 20px;
+  display: inline-block;
+}
+#points-added.fade {
+  transition: opacity 500ms linear;
+  opacity: 0;
 }
 #handwash{
   font-size: 30px;
-  box-shadow: inset 6px 6px 20px 0 rgba(0,0,0,0), inset -6px -6px 20px 0 rgba(60,0,0,0);
-  float: right;
-  padding: 20px;
+  letter-spacing: -18px;
+  float: right;    
+  padding: 20px 25px 20px 10px;
   border-radius: 50px;
   line-height: 40px;
   background: rgba(0,0,0,0.15);
+  box-shadow: inset 6px 6px 20px 0 rgba(0,0,0,0), inset -6px -6px 20px 0 rgba(60,0,0,0);
   border: 2px solid rgba(60,0,0,0.2);
+  transition: background 500ms linear;
 }
 #handwash.active {
   box-shadow: inset 6px 6px 20px 0 rgba(255,255,255,0.5), inset -6px -6px 20px 0 rgba(60,0,0,0.5);
@@ -141,4 +174,7 @@ h1{
   display: inline-block;
   width: 200px;
   vertical-align: middle;
+  border-left: 1px dotted;
+  padding-left: 5px;
+  margin-left: 2px;
 }
